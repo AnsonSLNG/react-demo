@@ -25,7 +25,7 @@ test('resolve successful promise', async () => {
     resultCode: 0,
   }
   const result = await wrapPromise<string>(
-    new Promise((resolve) => {
+    new Promise(resolve => {
       resolve({
         data: fake,
       })
@@ -43,7 +43,7 @@ test('resolve failed promise', async () => {
     resultCode: -1,
   }
   const result = await wrapPromise<string>(
-    new Promise((resolve) => {
+    new Promise(resolve => {
       resolve({
         data: fake,
       })

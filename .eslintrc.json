@@ -31,11 +31,14 @@
     "react-hooks/exhaustive-deps": 2,
     "react/no-array-index-key": 0,
 
-    "jsx-a11y/label-has-associated-control": ["error", {
-      "required": {
-        "some": ["nesting", "id"]
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
       }
-    }],
+    ],
     "prefer-promise-reject-errors": 0
   }
 }

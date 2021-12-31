@@ -19,12 +19,10 @@ export function isOK<T>(data: DataOk<T> | DataFail): data is DataOk<T> {
   return 'resultData' in data
 }
 
-export function wrapPromise<T>(
-  source: Promise<BridgeResponse<T>>,
-): Promise<DataOk<T> | DataFail> {
+export function wrapPromise<T>(source: Promise<BridgeResponse<T>>): Promise<DataOk<T> | DataFail> {
   return new Promise((resolve, reject) => {
     source
-      .then((value) => {
+      .then(value => {
         if (value.data.resultCode === 0) {
           resolve(value.data as DataOk<T>)
         } else {
