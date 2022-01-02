@@ -110,10 +110,10 @@ function App(): JSX.Element {
       },
     },
     {
-      status: 'Complete',
+      status: 'Completed',
       onclick: () => {
         setDisplayList(filterStatus(todoList, 'Completed'))
-        setFilterState('Complete')
+        setFilterState('Completed')
       },
     },
   ]
@@ -140,7 +140,8 @@ function App(): JSX.Element {
       }
 
       const newTodoList = [...todoList, { id: inputStartId + 1, active: false, text: todoText }]
-      syncList(newTodoList)
+      setTodoList(newTodoList)
+      setDisplayList(filterStatus(newTodoList, filterState))
       setTodoText('')
       setStartId(inputStartId + 1)
     }
@@ -211,8 +212,7 @@ function App(): JSX.Element {
       }
     })
 
-    console.log(tempFilter, 'tempFilter')
-    console.log(filterState, 'filterState')
+    setTodoList(tempFilter)
     setDisplayList(filterStatus(tempFilter, filterState))
     // syncList(filterStatus(tempFilter, filterState))
   }
@@ -245,8 +245,10 @@ function App(): JSX.Element {
             editTodoOnChange={editTodoOnChange}
             data={data}
             editKeydown={editKeydown}
+            data-testid="todo-content"
           />
         ))}
+        <input id="username-input" />
         <TodoFooter className="flex">
           <div>{displayList.length} item left</div>
           <ul className="flex pl-20">
@@ -257,7 +259,7 @@ function App(): JSX.Element {
                 }`}
                 key={ele.status}
               >
-                <button type="button" onClick={ele.onclick}>
+                <button data-testid={`${ele.status}-status`} type="button" onClick={ele.onclick}>
                   {ele.status}
                 </button>
               </li>
