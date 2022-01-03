@@ -75,16 +75,17 @@ function ToDoContent({
   const [showInput, setShowInput] = useState(false)
 
   return (
-    <div className="view display relative">
+    <div className="view display relative group">
       <ToDoCheckbox
         className="toggle check z-10"
         type="checkbox"
         onChange={() => todoContentOnChange(id)}
         checked={active}
         value="check list 1"
+        data-testid="todo-checkbox"
       />
       <ToDoLabel
-        className="todotod-content group"
+        className="todotod-content"
         onDoubleClick={() => {
           setShowInput(true)
           setTimeout(() => {
@@ -96,11 +97,11 @@ function ToDoContent({
           {text}
         </p>
       </ToDoLabel>
-
       <CloseButton
         onClick={() => todoContentRemove(id)}
         type="button"
         className="destroy group-hover:block"
+        data-testid="remove-todo-btn"
       >
         x
       </CloseButton>
@@ -115,6 +116,7 @@ function ToDoContent({
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           editKeydown(e)
         }}
+        placeholder="edit input"
       />
     </div>
   )

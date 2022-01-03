@@ -41,7 +41,7 @@ const Container = styled.form`
   }
 
   .create-todo {
-    width: 580px;
+    width: 600pxc;
     position: relative;
     .toggle-all {
       text-align: center;
@@ -237,18 +237,20 @@ function App(): JSX.Element {
           value={todoText}
           type="text"
         />
-        {displayList.map(data => (
-          <ToDoContent
-            key={data.id}
-            todoContentRemove={todoContentRemove}
-            todoContentOnChange={todoContentOnChange}
-            editTodoOnChange={editTodoOnChange}
-            data={data}
-            editKeydown={editKeydown}
-            data-testid="todo-content"
-          />
-        ))}
-        <input id="username-input" />
+        <div data-testid="todo-content-render">
+          {displayList.map(data => (
+            <ToDoContent
+              key={data.id}
+              todoContentRemove={todoContentRemove}
+              todoContentOnChange={todoContentOnChange}
+              editTodoOnChange={editTodoOnChange}
+              data={data}
+              editKeydown={editKeydown}
+              data-testid="todo-content"
+            />
+          ))}
+        </div>
+
         <TodoFooter className="flex">
           <div>{displayList.length} item left</div>
           <ul className="flex pl-20">
@@ -274,6 +276,7 @@ function App(): JSX.Element {
                 onClick={() => {
                   syncList(filterStatus(todoList, 'Active'))
                 }}
+                data-testid="Clear-completed-status"
               >
                 Clear completed
               </button>
