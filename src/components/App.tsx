@@ -162,13 +162,7 @@ function App(): JSX.Element {
 
   const editTodoOnChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const newTodoList = todoList.map(_list => {
-      if (id === _list.id)
-        return {
-          ..._list,
-          text: e.currentTarget.value,
-        }
-
-      return _list
+      return id === _list.id ? { ..._list, text: e.currentTarget.value } : _list
     })
 
     syncList(newTodoList)
@@ -186,18 +180,13 @@ function App(): JSX.Element {
   }
 
   const filterStatus = (data: IToDoList[], status: string) => {
-    // setFilterState(status)
-
     switch (status) {
-      case 'All':
-        return data
       case 'Completed':
         return data.filter(_d => _d.active === true)
       case 'Active':
         return data.filter(_d => _d.active === false)
-
+      case 'All':
       default:
-        console.warn('please input your status')
         return data
     }
   }
@@ -226,6 +215,7 @@ function App(): JSX.Element {
           className="check toggle-all"
           type="checkbox"
           onChange={toggleAllStatus}
+          data-testid="toggle-all-btn"
         />
         <label htmlFor="toggle-all">Mark all as complete</label>
 
